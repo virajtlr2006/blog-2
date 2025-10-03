@@ -2,8 +2,10 @@
 import { useForm } from "react-hook-form"
 import React from 'react'
 import { signupAction } from "@/Action/authAction"
+import { useRouter } from "next/navigation"
 
 const page = () => {
+    const router  = useRouter()
     const {
         register,
         handleSubmit,
@@ -12,7 +14,13 @@ const page = () => {
     } = useForm()
 
     const onSubmit = async (user) => {
-        signupAction(user)
+        try {
+            await signupAction(user)
+            router.replace("/login")
+        } catch (error) {
+            alert ("Internal server Error")
+        }
+        
     }
     return (
         <div>
