@@ -1,11 +1,13 @@
 'use client'
 import { loginAction } from '@/Action/authAction'
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from "react-hook-form"
 
 
 const page = () => {
+
+    const [errormsg, setErrormsg] = useState(null)
 
     const router = useRouter()
     const {
@@ -19,10 +21,10 @@ const page = () => {
         try {
             // console.log(user);
             await loginAction(user)
-            localStorage.setItem('email',user.email)
+            localStorage.setItem('email', user.email)
             router.replace("/")
         } catch (error) {
-            alert("SignUp First")
+            setErrormsg(error.message)
         }
 
     }
@@ -36,6 +38,10 @@ const page = () => {
                 {/* Password */}
                 <input {...register("password", { required: true })} />
                 {errors.password && <span>This field is required</span>}
+                {/* Error to display on screen */}
+                {errormsg && <>
+                    <p>{errormsg}</p>
+                </>}
 
                 <input type='submit' />
             </form>
