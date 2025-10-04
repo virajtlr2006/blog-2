@@ -23,17 +23,18 @@ const page = () => {
   }
 
   return (
-    <div>
+    <div >
       {allPost && allPost.map((p) =>
+      <a key={p._id} href={`/post/${p._id}`}>
         <div key={p._id}>
           <p>{p.title}</p>
           <img src={p.image} />
           <p>{p.description}</p>
-
           {errormsg && <>
             <p>{errormsg}</p>
           </>}
         </div>
+        </a>
       )}
     </div>
   )

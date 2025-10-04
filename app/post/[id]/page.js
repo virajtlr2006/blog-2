@@ -23,7 +23,7 @@ const page = () => {
     }
 
     const editpost = async () => {
-        router.replace(`post/edit/${showpost._id}`)
+        router.replace(`./edit/${showpost._id}`)
     }
     const deletepost = async () => {
         await deletepostAction(id)
@@ -35,10 +35,9 @@ const page = () => {
                 <p>{showpost.title}</p>
                 <img src={showpost.image} />
                 <p>{showpost.description}</p>
-                
-                    <button onClick={editpost}>Edit</button>
-                    <button onClick={deletepost}>Delete</button>
-                
+                <button onClick={editpost}>Edit</button>
+                <button onClick={deletepost}>Delete</button>
+
             </>}
         </div>
     )

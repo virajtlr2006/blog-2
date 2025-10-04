@@ -1,10 +1,11 @@
 'use client'
 import { editPostAction } from '@/Action/postAction'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import React, { useEffect } from 'react'
 import { useForm } from "react-hook-form"
 
 const page = () => {
+  const router = useRouter()
 
   const {
         register,
@@ -19,6 +20,7 @@ const page = () => {
 
   const onSubmit =async (user) => {
     await editPostAction({...user,"id":id})
+    router.replace("/")
   }
   
   return (
@@ -27,9 +29,6 @@ const page = () => {
 
                 <input {...register("title", { required: true })} />
                 {errors.title && <span>This field is required</span>}
-
-                <input {...register("image", { required: true })} />
-                {errors.image && <span>This field is required</span>}
 
                 <input {...register("description", { required: true })} />
                 {errors.description && <span>This field is required</span>}

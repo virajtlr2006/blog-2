@@ -1,10 +1,13 @@
 'use client'
 import { profileAction } from '@/Action/authAction'
+import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
 const page = () => {
 
     const [profile, setProfile] = useState(null)
+
+    const router = useRouter()
 
     useEffect(() => {
         getProfile()
@@ -20,6 +23,12 @@ const page = () => {
         }
     }
 
+    const logOut = async () => {
+        await localStorage.removeItem("email")
+        alert("Log Out Successful")
+        router.replace("/login")
+    }
+
     return (
         <div>
             <h1>Thi is user profile</h1>
@@ -27,6 +36,8 @@ const page = () => {
                 {/* Displays information on display */}
                 <p>{profile.name}</p>
                 <p>{profile.email}</p>
+                <a onClick={logOut}>Log Out</a>
+                <a>Edit Profile</a>
             </>}
         </div>
     )

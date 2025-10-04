@@ -50,3 +50,4 @@ export const editProfileAction = async (email) => {
     const edituser = await Auth.findOneAndUpdate({email})
     console.log(parseJSON(edituser))
 }
+

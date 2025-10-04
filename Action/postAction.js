@@ -57,3 +57,13 @@ export const deletepostAction = async (id) => {
     const deletepost = await Post.findByIdAndDelete(id)
     return {"msg":"Post Deleted Successfully"}
 }
+
+// User all posts
+
+export const userallPostAction = async (email) => {
+    console.log(email)
+    await connectDB()
+    const userPosts = await Post.find({email})
+    console.log(userPosts)
+    return parseJSON(userPosts)
+}

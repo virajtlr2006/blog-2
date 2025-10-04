@@ -15,7 +15,9 @@ const page = () => {
 
     const newpost = async (post) => {
         try {
-            await newpostAction(post);
+            await newpostAction({...post,
+                "email":localStorage.getItem("email")
+            })
             router.replace("/")
         } catch (error) {
             console.log(error)
