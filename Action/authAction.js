@@ -42,3 +42,11 @@ export const profileAction = async (email) => {
     // console.log(parseJSON(dbuser));
     return parseJSON(dbuser)
 }
+
+// Edit Profile
+
+export const editProfileAction = async (email) => {
+    await connectDB()
+    const edituser = await Auth.findOneAndUpdate({email})
+    console.log(parseJSON(edituser))
+}
