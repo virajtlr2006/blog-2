@@ -1,5 +1,6 @@
 'use client'
 import { allpostAction } from '@/Action/postAction'
+import Singlepostcard from '@/Components/SinglePostcard'
 import React, { useEffect, useState } from 'react'
 
 const page = () => {
@@ -9,12 +10,16 @@ const page = () => {
 
   useEffect(() => {
     getallPost()
+   
+
   }, [])
 
 
   const getallPost = async () => {
     try {
       const all = await allpostAction()
+      console.log(all);
+      
       setallPost(all)
     } catch (error) {
       seterrormsg(error.message)
@@ -25,16 +30,17 @@ const page = () => {
   return (
     <div >
       {allPost && allPost.map((p) =>
-      <a key={p._id} href={`/post/${p._id}`}>
-        <div key={p._id}>
-          <p>{p.title}</p>
-          <img src={p.image} />
-          <p>{p.description}</p>
-          {errormsg && <>
-            <p>{errormsg}</p>
-          </>}
-        </div>
-        </a>
+      <Singlepostcard key={p._id} id={p._id} title={p.title} image={p.image} description={p.description} like={p.like} comments={[
+        {
+        "email":"surati",
+        "msg":"This is my first comment"
+      },
+      {
+        "email":"viraj",
+        "msg":"TAvernushka sharma lo"
+      }
+    ]}/>
+
       )}
     </div>
   )

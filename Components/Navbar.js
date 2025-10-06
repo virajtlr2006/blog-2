@@ -1,6 +1,6 @@
 import React from 'react'
 
-const page = () => {
+const navbar = () => {
     return (
         <div className='flex gap-3'>
             <a href='/post/new'>
@@ -16,4 +16,4 @@ const page = () => {
     )
 }
 
-export default page
+export default navbar

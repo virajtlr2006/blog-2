@@ -18,6 +18,8 @@ const page = () => {
 
     const singlePost = async () => {
         const save = await singlePostAction(id)
+        console.log(save);
+        
         const email = localStorage.getItem("email")
         setshowpost(save)
     }

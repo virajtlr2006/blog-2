@@ -8,17 +8,17 @@ import { parseJSON } from "@/Utils/parse"
 
 export const newpostAction = async (post) => {
     try {
-         // console.log(post);
-    await connectDB()
+        // console.log(post);
+        await connectDB()
 
-    const newPost = await Post.create(post)
-    // console.log(parseJSON(newPost));
-    return {"msg":"Post Created Successfully"}
+        const newPost = await Post.create({ ...post })
+        // console.log({...post,"like":["hhhh"]});
+        return { "msg": "Post Created Successfully" }
     } catch (error) {
         throw new Error("Internal server error");
-        
+
     }
-   
+
 }
 
 // All Post
@@ -26,7 +26,7 @@ export const newpostAction = async (post) => {
 export const allpostAction = async () => {
     await connectDB()
     const all = await Post.find({})
-    // console.log(parseJSON(all))
+    // console.log(parseJSON("uijujhujh",all))
     return parseJSON(all)
 }
 
@@ -35,7 +35,7 @@ export const allpostAction = async () => {
 export const editPostAction = async (post) => {
     // console.log(post)
     await connectDB()
-    const editpost = await Post.findByIdAndUpdate(post.id,post)
+    const editpost = await Post.findByIdAndUpdate(post.id, post)
     // console.log(editpost);
     return parseJSON(editpost)
 }
@@ -55,15 +55,35 @@ export const singlePostAction = async (id) => {
 export const deletepostAction = async (id) => {
     await connectDB()
     const deletepost = await Post.findByIdAndDelete(id)
-    return {"msg":"Post Deleted Successfully"}
+    return { "msg": "Post Deleted Successfully" }
 }
 
 // User all posts
 
 export const userallPostAction = async (email) => {
-    console.log(email)
+    // console.log(email)
     await connectDB()
-    const userPosts = await Post.find({email})
-    console.log(userPosts)
+    const userPosts = await Post.find({ email })
+    // console.log(userPosts)
     return parseJSON(userPosts)
 }
+
+// Like Count 
+
+export const likeAction = async (email, id) => {
+    // console.log(email,id);
+    const userpost = await Post.findById(id)
+    if (userpost.like.includes(email)) {
+       userpost.like =  userpost.like.filter((p) => p != email)
+        await userpost.save()
+    }
+    else {
+        userpost.like.push(email)
+        // console.log(userpost);
+       await  userpost.save()
+    }
+
+    return {}
+} 
+
+// Comment
