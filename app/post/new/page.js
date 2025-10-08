@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import React from 'react'
 import { useForm } from "react-hook-form"
 
+
 const page = () => {
     const router = useRouter()
     const {
@@ -16,7 +17,7 @@ const page = () => {
     const newpost = async (post) => {
         try {
             await newpostAction({...post,
-                "email":localStorage.getItem("email")
+                "email":localStorage.getItem("email"),
             })
             router.replace("/")
         } catch (error) {

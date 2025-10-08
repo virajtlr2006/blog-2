@@ -10,8 +10,8 @@ export const newpostAction = async (post) => {
     try {
         // console.log(post);
         await connectDB()
-
-        const newPost = await Post.create({ ...post })
+console.log({ ...post,"comment":[{"ii":"ikiiiiiiii"}] });
+        const newPost = await Post.create({ ...post,"comment":"kkklkk"})
         // console.log({...post,"like":["hhhh"]});
         return { "msg": "Post Created Successfully" }
     } catch (error) {
@@ -87,3 +87,17 @@ export const likeAction = async (email, id) => {
 } 
 
 // Comment
+
+export const commentAction = async (comment,email,id) => {
+    console.log(comment,email,id);
+    const post = await Post.findById(id)
+if(post.comment == null || post.comment ==undefined){
+   
+    post.comment = "kkkkkk,"
+    console.log(post);
+    
+    await post.save()
+    
+}
+    
+}
