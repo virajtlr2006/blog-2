@@ -28,9 +28,9 @@ const page = () => {
   }
 
   return (
-    <div >
+    <div className='flex flex-col gap-5'>
       {allPost && allPost.map((p) =>
-      <Singlepostcard key={p._id} id={p._id} title={p.title} image={p.image} description={p.description} like={p.like} comments={[
+      <Singlepostcard key={p._id} id={p._id} title={p.email} image={p.image} description={p.description} like={p.like} comments={[
         {
         "email":"surati",
         "msg":"This is my first comment"

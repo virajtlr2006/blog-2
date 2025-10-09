@@ -1,12 +1,14 @@
 'use client'
 import { newpostAction } from '@/Action/postAction'
+import { useUser } from '@clerk/nextjs'
 import { useRouter } from 'next/navigation'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from "react-hook-form"
 
 
 const page = () => {
     const router = useRouter()
+    const [userid, setuserid] = useState(null)
     const {
         register,
         handleSubmit,
@@ -14,10 +16,20 @@ const page = () => {
         formState: { errors },
     } = useForm()
 
+    const user = useUser()
+
+    useEffect(() => {
+        if (user.user) {
+            setuserid(user.user.username);
+
+        }
+    }, [user])
+
     const newpost = async (post) => {
         try {
-            await newpostAction({...post,
-                "email":localStorage.getItem("email"),
+            await newpostAction({
+                ...post,
+                "email": userid
             })
             router.replace("/")
         } catch (error) {

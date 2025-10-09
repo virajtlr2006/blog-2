@@ -61,7 +61,7 @@ export const deletepostAction = async (id) => {
 // User all posts
 
 export const userallPostAction = async (email) => {
-    // console.log(email)
+    console.log(email)
     await connectDB()
     const userPosts = await Post.find({ email })
     // console.log(userPosts)

@@ -1,11 +1,21 @@
 'use client'
 import { editPostAction } from '@/Action/postAction'
+import { useUser } from '@clerk/nextjs'
 import { useParams, useRouter } from 'next/navigation'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from "react-hook-form"
 
 const page = () => {
   const router = useRouter()
+  const [userid, setuserid] = useState(null)
+      useEffect(() => {
+        if (user.user) {
+            setuserid(user.user.username);
+
+        }
+    }, [user])
+
+  const user = useUser()
 
   const {
         register,

@@ -1,43 +1,39 @@
-'use client'
-import { profileAction } from '@/Action/authAction'
-import { useRouter } from 'next/navigation'
+"use client"
+import { useUser } from '@clerk/nextjs'
 import React, { useEffect, useState } from 'react'
+
 
 const page = () => {
 
-    const [profile, setProfile] = useState(null)
-
-    const router = useRouter()
-
+    const [fullName, setFullName] = useState(null)
+    const [username, setUsername] = useState(null)
+    const [imageUrl, setImageUrl] = useState(null)
+    const user = useUser()
+    if (!user) {
+        return <div className='pl-59'>loading</div>
+    }
     useEffect(() => {
-        getProfile()
-    }, [])
+        if (user.user) {
+            // console.log(user.user);
 
-    const getProfile = async () => {
-        try {
-            const email = localStorage.getItem("email") //Retrive email from localstorage
-            const user = await profileAction(email); //Send data to backend
-            setProfile(user);
-        } catch (error) {
-            alert("SignUp first")
+            setFullName(user.user.fullName);
+            setUsername(user.user.username);
+            setImageUrl(user.user.imageUrl);
         }
-    }
 
-    const logOut = async () => {
-        await localStorage.removeItem("email")
-        alert("Log Out Successful")
-        router.replace("/login")
-    }
+
+    }, [user])
 
     return (
-        <div>
-            <h1>Thi is user profile</h1>
-            {profile && <>
-                {/* Displays information on display */}
-                <p>{profile.name}</p>
-                <p>{profile.email}</p>
-                <a onClick={logOut}>Log Out</a>
-                <a>Edit Profile</a>
+        <div className='pl-59'>
+            {imageUrl && <>
+                <img className='rounded-full h-30 w-30' src={imageUrl} />
+            </>}
+            {username && <>
+                <p>{username}</p>
+            </>}
+            {fullName && <>
+                <p>{fullName}</p>
             </>}
         </div>
     )
