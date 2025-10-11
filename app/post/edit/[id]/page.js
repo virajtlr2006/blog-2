@@ -6,17 +6,19 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from "react-hook-form"
 
 const page = () => {
+  // Router & local state
   const router = useRouter()
   const [userid, setuserid] = useState(null)
-      useEffect(() => {
-        if (user.user) {
-            setuserid(user.user.username);
 
-        }
-    }, [user])
-
+  // Auth — get current user id/username
   const user = useUser()
+  useEffect(() => {
+    if (user.user) {
+      setuserid(user.user.username)
+    }
+  }, [user])
 
+  // Form — register inputs and handle submission
   const {
         register,
         handleSubmit,
@@ -24,27 +26,29 @@ const page = () => {
         formState: { errors },
     } = useForm()
 
-
+  // Params — grab post id from route
   const {id} = useParams()
-  console.log(id);
-
-  const onSubmit =async (user) => {
-    await editPostAction({...user,"id":id})
+  // Submit — call server action then redirect to home
+  const onSubmit = async (user) => {
+    await editPostAction({ ...user, id })
     router.replace("/")
   }
   
   return (
     <div>
-  <form  onSubmit={handleSubmit(onSubmit)}>
+      {/* UI — basic edit form (title, description) */}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        {/* Title input */}
+        <input {...register("title", { required: true })} />
+        {errors.title && <span>This field is required</span>}
 
-                <input {...register("title", { required: true })} />
-                {errors.title && <span>This field is required</span>}
+        {/* Description input */}
+        <input {...register("description", { required: true })} />
+        {errors.description && <span>This field is required</span>}
 
-                <input {...register("description", { required: true })} />
-                {errors.description && <span>This field is required</span>}
-
-                <input type="submit" />
-            </form>
+        {/* Submit */}
+        <input type="submit" />
+      </form>
     </div>
   )
 }
