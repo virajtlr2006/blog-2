@@ -84,12 +84,11 @@ const page = () => {
                 </div>
               </div>
 
-              {/* Bio */}
               <div className="space-y-1">
                 <h2 className="font-semibold text-gray-900">{fullName}</h2>
-                <p className="text-gray-600">Digital creator</p>
-                <p className="text-gray-600">📍 Sharing moments from life</p>
-                <p className="text-gray-600">✨ Love photography & travel</p>
+                <p className="text-gray-600">🚀 SaaS Founder & AI Builder</p>
+                <p className="text-gray-600">⚡ Crafting tools that boost focus, flow & execution</p>
+                <p className="text-gray-600">🌱 Calm mind. Relentless mission.</p>
               </div>
             </div>
           </div>
@@ -124,7 +123,7 @@ const page = () => {
                       alt={post.title || "Post"}
                       className="w-full h-full object-cover rounded-sm"
                     />
-                    
+
                     {/* Hover Overlay */}
                     {hoveredPost === index && (
                       <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-sm transition-all duration-200">
