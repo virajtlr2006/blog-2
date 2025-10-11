@@ -35,6 +35,7 @@ const page = () => {
             {fullName && <>
                 <p>{fullName}</p>
             </>}
+
         </div>
     )
 }
