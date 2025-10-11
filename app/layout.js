@@ -1,7 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/Components/Navbar.js";
-import Sidebar from "@/Components/Sidebar.js";
+import Navbar from "@/components/Navbar.js";
+import Sidebar from "@/components/Sidebar.js";
 import {
   ClerkProvider
 } from '@clerk/nextjs'
