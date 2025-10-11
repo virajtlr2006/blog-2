@@ -51,7 +51,7 @@ const page = () => {
         router.replace("/")
     }
     return (
-        <div className='h-260 '>
+        <div className='h-240 ml-55 mt-5 '>
             {showpost && <>
 
                 <div className=' '>
